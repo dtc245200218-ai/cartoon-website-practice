@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thế Giới Hoạt Hình</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">Thế Giới Hoạt Hình</div>
+      <nav class="head-link">
+        <a href="#">Trang chủ</a>
+        <a href="#new">Phim mới</a>
+        <a href="#popular">Phim nổi bật</a>
+        <a href="#footer">Liên hệ</a>
+      </nav>
+    </header>
+
+    <div class="page-title">
+      <h1>Phim hoạt hình tiếng Việt</h1>
+      <p>Khám phá thế giới hoạt hình dành cho bạn!</p>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Tìm phim theo tên..." />
+      <button onclick="searchMovies()">Tìm kiếm</button>
+      <select id="sortSelect" onchange="sortMovies()">
+        <option value="new">Mới cập nhật</option>
+        <option value="views">Nhiều lượt xem</option>
+      </select>
+    </div>
+
+    <div class="content">
+      <div class="left-content">
+        <h2 id="new">Danh sách phim</h2>
+
+        <div class="movie-list" id="movieList">
+          <div
+            class="movie-item"
+            data-title="Doraemon"
+            data-views="5000"
+            data-date="3"
+          >
+            <img
+              src="https://placehold.co/120x75/4a90e2/ffffff?text=Doraemon"
+              alt="Doraemon"
+            />
+            <div>
+              <a
+                href="#"
+                onclick="
+                  playMovie('doraemon', 'Doraemon');
+                  return false;
+                "
+                >Doraemon</a
+              >
+              <p>Hoạt hình vui nhộn</p>
+              <small>5.000 lượt xem</small>
+            </div>
+          </div>
+
+          <div
+            class="movie-item"
+            data-title="Tom va Jerry"
+            data-views="8000"
+            data-date="2"
+          >
+            <img
+              src="https://placehold.co/120x75/e67e22/ffffff?text=Tom+Jerry"
+              alt="Tom và Jerry"
+            />
+            <div>
+              <a
+                href="#"
+                onclick="
+                  playMovie('tom', 'Tom và Jerry');
+                  return false;
+                "
+                >Tom và Jerry</a
+              >
+              <p>Những màn rượt đuổi hài hước</p>
+              <small>8.000 lượt xem</small>
+            </div>
+          </div>
+
+          <div
+            class="movie-item"
+            data-title="Meo con"
+            data-views="3000"
+            data-date="1"
+          >
+            <img
+              src="https://placehold.co/120x75/27ae60/ffffff?text=Kitten"
+              alt="Mèo con"
+            />
+            <div>
+              <a
+                href="#"
+                onclick="
+                  playMovie('kitten', 'Mèo con');
+                  return false;
+                "
+                >Mèo con đáng yêu</a
+              >
+              <p>Câu chuyện về những người bạn nhỏ</p>
+              <small>3.000 lượt xem</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-content">
+        <h2 id="popular">Đang phát: Doraemon</h2>
+
+        <div class="video-container" id="videoContainer">
+          <iframe
+            id="moviePlayer"
+            src="https://www.youtube-nocookie.com/embed/2Z7m8f7m5xY"
+            title="Video hoạt hình"
+            allow="
+              accelerometer;
+              autoplay;
+              clipboard-write;
+              encrypted-media;
+              gyroscope;
+              picture-in-picture;
+            "
+            allowfullscreen
+          >
+          </iframe>
+        </div>
+
+        <p id="movieDescription">
+          Chọn phim ở danh sách bên trái để xem nội dung.
+        </p>
+
+        <h3>Video HTML5 mẫu</h3>
+        <video controls preload="metadata">
+          <source
+            src="https://www.w3schools.com/html/mov_bbb.mp4"
+            type="video/mp4"
+          />
+          Trình duyệt của bạn không hỗ trợ video.
+        </video>
+        <p class="note">Video này dùng để minh họa thẻ video HTML5.</p>
+      </div>
+    </div>
+
+    <footer id="footer">
+      <p>© 2026 Thế Giới Hoạt Hình. Bản quyền thuộc về website.</p>
+      <p>Nội dung được chọn lọc dành cho người xem.</p>
+    </footer>
+
+    <script>
+      const movies = {
+        doraemon: {
+          title: "Doraemon",
+          url: "https://www.youtube-nocookie.com/embed/2Z7m8f7m5xY",
+          description: "Câu chuyện về chú mèo máy đến từ tương lai.",
+        },
+        tom: {
+          title: "Tom và Jerry",
+          url: "https://www.youtube-nocookie.com/embed/2Z7m8f7m5xY",
+          description:
+            "Những màn rượt đuổi vui nhộn giữa mèo Tom và chuột Jerry.",
+        },
+        kitten: {
+          title: "Mèo con đáng yêu",
+          url: "https://www.youtube-nocookie.com/embed/2Z7m8f7m5xY",
+          description: "Một câu chuyện hoạt hình nhẹ nhàng.",
+        },
+      };
+
+      function playMovie(key, title) {
+        const movie = movies[key];
+        document.getElementById("moviePlayer").src = movie.url;
+        document.querySelector(".right-content h2").textContent =
+          "Đang phát: " + title;
+        document.getElementById("movieDescription").textContent =
+          movie.description;
+      }
+
+      function searchMovies() {
+        const keyword = document
+          .getElementById("searchInput")
+          .value.toLowerCase()
+          .trim();
+        document.querySelectorAll(".movie-item").forEach((item) => {
+          item.style.display = item.dataset.title
+            .toLowerCase()
+            .includes(keyword)
+            ? "flex"
+            : "none";
+        });
+      }
+
+      function sortMovies() {
+        const list = document.getElementById("movieList");
+        const items = Array.from(list.querySelectorAll(".movie-item"));
+        const mode = document.getElementById("sortSelect").value;
+
+        items.sort((a, b) =>
+          mode === "views"
+            ? Number(b.dataset.views) - Number(a.dataset.views)
+            : Number(b.dataset.date) - Number(a.dataset.date),
+        );
+
+        items.forEach((item) => list.appendChild(item));
+      }
+    </script>
+  </body>
+</html>
